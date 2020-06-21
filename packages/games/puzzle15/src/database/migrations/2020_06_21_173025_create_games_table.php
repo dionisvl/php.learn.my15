@@ -16,7 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->char('order_symbols_map', 256);
+            $table->json('order_symbols_map');
             $table->date('start_at')->nullable();
             $table->date('finish_at')->nullable();
             $table->foreignId('game_background_id')->nullable();

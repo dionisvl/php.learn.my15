@@ -26,20 +26,10 @@
                 <h1>Пятнашки</h1>
             </div>
 
-            <div class="links">
-                @auth
-
-                    <a href="{{ url('/game/create') }}">Создать игру</a>
-
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-
-
-            </div>
+            <form action="{{route('game.store')}}">
+                <input type="hidden" value="11,13,14,15,1,2,3,6,5,4,7,8,9,0,10,12" name="gameString">
+                <button type="submit">Создать новую игру 4х4</button>
+            </form>
         </div>
     </div>
 @endsection

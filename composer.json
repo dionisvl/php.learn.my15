@@ -35,7 +35,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Games\\Puzzle15\\": "packages/games/puzzle15/src/"
         },
         "classmap": [
             "database/seeds",

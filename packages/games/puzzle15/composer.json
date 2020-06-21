@@ -1,0 +1,19 @@
+{
+  "name": "games/puzzle15",
+  "description": "puzzle 15 game",
+  "authors": [
+    {
+      "name": "den",
+      "email": "dionisvl3@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Games\\puzzle15\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+      "laravel/framework": "^7.0"
+  }
+}

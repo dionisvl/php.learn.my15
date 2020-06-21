@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Games\Puzzle15\Puzzle15ServiceProvider::class,
 
         /*
          * Application Service Providers...

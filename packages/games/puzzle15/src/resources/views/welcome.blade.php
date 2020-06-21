@@ -28,9 +28,7 @@
 
             <div class="links">
                 @auth
-
                     <a href="{{ url('/game/create') }}">Создать игру</a>
-
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
@@ -38,7 +36,8 @@
                     @endif
                 @endauth
 
-
+userId: {!! $userId!!}
+                gameId: {!! $gameId !!}
             </div>
         </div>
     </div>

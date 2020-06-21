@@ -4,20 +4,32 @@ namespace Games\Puzzle15\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Games\Puzzle15\Models\Game;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+
+        if ($userId){
+            $game = DB::table('games')->where('user_id', $userId)->whereNull('finish_at')->first();
+
+            return view('puzzle::welcome', ['userId' => $userId, 'gameId' => $game->id]);
+        }
+
+        return view('puzzle::welcome');
     }
 
     /**
@@ -46,7 +58,7 @@ class GameController extends Controller
             $gameString = explode(',', $request->gameString);
         } else {
             for ($i = 1; $i <= $row * $col; $i++) {
-                $gameString[] = $i-1;
+                $gameString[] = $i - 1;
             }
             shuffle($gameString);
         }
@@ -55,7 +67,7 @@ class GameController extends Controller
         for ($i = 0; $i < $row; $i++) {
             for ($j = 0; $j < $col; $j++) {
                 $k++;
-                $gameStringBox[$i][$j] = $gameString[$k-1];
+                $gameStringBox[$i][$j] = $gameString[$k - 1];
             }
         }
 
@@ -77,8 +89,8 @@ class GameController extends Controller
     public function show(Game $game)
     {
         $gameId = 1;
-        $gameStringBox = [[10,15,2,9],[6,1,5,12],[11,4,13,0],[8,3,14,7]];
-        return view('puzzle::start',['gameId'=>$gameId,'gameString' => $gameStringBox]);
+        $gameStringBox = [[10, 15, 2, 9], [6, 1, 5, 12], [11, 4, 13, 0], [8, 3, 14, 7]];
+        return view('puzzle::start', ['gameId' => $gameId, 'gameString' => $gameStringBox]);
     }
 
     /**

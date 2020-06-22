@@ -26,6 +26,9 @@ class GameController extends Controller
         if ($userId){
             $game = DB::table('games')->where('user_id', $userId)->whereNull('finish_at')->first();
 
+            if (empty($game->id)){
+                return view('puzzle::welcome', ['userId' => $userId]);
+            }
             return view('puzzle::welcome', ['userId' => $userId, 'gameId' => $game->id]);
         }
 

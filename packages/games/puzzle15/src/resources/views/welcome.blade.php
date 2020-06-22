@@ -14,8 +14,13 @@
                             </div>
                         @endif
                         @auth
-                            You are logged in!
+                            You are logged in!<br>
+                            userId: {!! $userId!!}<br>
                         @endauth
+                        @isset($gameId)
+                            <div>Вы можете продолжить не законченную игру:</div>
+                            gameId: {!! $gameId !!}
+                        @endisset
                     </div>
                 </div>
             </div>
@@ -35,9 +40,6 @@
                         <a href="{{ route('register') }}">Register</a>
                     @endif
                 @endauth
-
-userId: {!! $userId!!}
-                gameId: {!! $gameId !!}
             </div>
         </div>
     </div>

@@ -23,10 +23,10 @@ class GameController extends Controller
     {
         $userId = Auth::id();
 
-        if ($userId){
+        if ($userId) {
             $game = DB::table('games')->where('user_id', $userId)->whereNull('finish_at')->first();
 
-            if (empty($game->id)){
+            if (empty($game->id)) {
                 return view('puzzle::welcome', ['userId' => $userId]);
             }
             return view('puzzle::welcome', ['userId' => $userId, 'gameId' => $game->id]);
@@ -89,11 +89,20 @@ class GameController extends Controller
      * @param \App\Game $game
      * @return Response
      */
-    public function show(Game $game)
+    public function show(Request $request)
     {
-        $gameId = 1;
-        $gameStringBox = [[10, 15, 2, 9], [6, 1, 5, 12], [11, 4, 13, 0], [8, 3, 14, 7]];
-        return view('puzzle::start', ['gameId' => $gameId, 'gameString' => $gameStringBox]);
+        $gameId = (int)$request->gameId;
+        $game = Game::where('id', $gameId)->first();
+
+        $gameStringBox = json_decode($game->order_symbols_map);
+
+        if (empty($game->start_at)) {
+            $game->start_at = date('Y-m-d H:i:s');
+            $game->save();
+        }
+        //       $gameStringBox = [[10, 15, 2, 9], [6, 1, 5, 12], [11, 4, 13, 0], [8, 3, 14, 7]];
+//        dd($gameStringBox);
+        return view('puzzle::start', ['gameId' => $gameId, 'gameString' => $gameStringBox, 'startAt' => $game->start_at]);
     }
 
     /**

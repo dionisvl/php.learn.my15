@@ -9,7 +9,7 @@
 
                     <div>Игра успешно созданна.</div>
                     <div>Сгенерированная строка для игры:</div>
-<pre>
+                    <pre>
     <code id="gameString">{!! json_encode($gameString) !!}</code>
 </pre>
 
@@ -21,7 +21,7 @@
                         @endif
                     </div>
 
-                    <a href="{{route('game.show')}}">Начать игру</a>
+                    <a class='button' href="{{route('game.show',['gameId' => $gameId])}}">Начать игру</a>
                 </div>
             </div>
         </div>

@@ -17,10 +17,6 @@
                             You are logged in!<br>
                             userId: {!! $userId!!}<br>
                         @endauth
-                        @isset($gameId)
-                            <div>Вы можете продолжить не законченную игру:</div>
-                            gameId: {!! $gameId !!}
-                        @endisset
                     </div>
                 </div>
             </div>
@@ -33,7 +29,13 @@
 
             <div class="links">
                 @auth
-                    <a href="{{ url('/game/create') }}">Создать игру</a>
+                    <div>Вы можете:</div>
+                    @isset($gameId)
+                        <a class='button' href="{{route('game.show',['gameId' => $gameId])}}">
+                            продолжить не законченную игру ({!! $gameId !!})</a> или
+                    @endisset
+
+                    <a class="button" href="{{ url('/game/create') }}">Создать новую игру</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     @if (Route::has('register'))
